@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\QuestionController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,9 +26,23 @@ Route::get('/nim/{param1?}', function ($param1 = '2557301089') {
 });
 
 Route::get('/mahasiswa/detail', function () {
-    return '<h1>Selamat Datang!</h1><h2>Ini halaman Detail Mahasiswa</h2>';
+    return view('halaman-mahasiswa-detail');
 });
 
 Route::get('/mahasiswa/profile', function () {
-    return '<h1>Selamat Datang!</h1><h2>Ini halaman Profil Mahasiswa</h2>';
+    return view('halaman-mahasiswa-profile');
 });
+
+Route::get('/home', [HomeController::class, 'index']);
+
+Route::get('/about', function () {
+    return view('halaman-about');
+});
+
+Route::post('question/store', [QuestionController::class, 'store'])
+		->name('question.store');
+
+
+
+Route::get('/question', [QuestionController::class, 'index'])
+		->name('question.index');
